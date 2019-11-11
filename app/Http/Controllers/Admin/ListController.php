@@ -8,6 +8,7 @@ use Hash;
 use DB;
 use Exception;
 use Mail;
+use App\Lists;
 
 
 class ListController extends Controller
@@ -27,8 +28,9 @@ class ListController extends Controller
     return view('admin.list.add_list');
   }
   public function edit_list($id){
-    $user =  $this->getList()->getSinglelist($id);
-    return view('admin.list.add_list');
+    $list =  $this->getList()->getSinglelist($id);
+    //dd($list);
+    return view('admin.list.edit_list',compact('list'));
   }
   public function saveList(Request $request){
        $validatedData = Validator::make($request->all(),[
@@ -82,8 +84,8 @@ class ListController extends Controller
       return $this->getList()->allLeads();
     } 
    public function edit_lead($id){
-	 $getnumber = $this->getList()->getLeadnumber($id);
-	 //dd($getuser);
+       $getnumber = $this->getList()->getLeadnumber($id);
+	 
 	  return view('admin.list_details.edit_number',compact('getnumber'));    	
     }
     public function updateLead(Request $request){
@@ -109,6 +111,32 @@ class ListController extends Controller
 	        return redirect()->route('list_log');   	 		
   	 	}    	
     }
+    
+    public function updateList(Request $request){
+       $validatedData = Validator::make($request->all(),[
+        'list_name'     => 'required',
+        'list_type'=> 'required',
+        ],[ 
+          "list_name.required"     =>   'Name is required',
+          "list_type.required"	 => 'Phone number is required',
+           ])->validate();  	
+       	       // $data = $request->all();
+                
+      $updateList =   Lists::where('id',$request->id)
+          ->update(['list_name' => $request->list_name,'list_type' => $request->list_type]);
+                
+  	 	if($updateList){
+	        $request->session()->flash('message', 'List Updated successfully.');
+	        $request->session()->flash('message-type', 'success');
+	        return redirect()->route('list_log');  	 		
+  	 	}
+  	 	else{
+	        $request->session()->flash('message', 'Something went wrong.');
+	        $request->session()->flash('message-type', 'danger');
+	        return redirect()->route('list_log');   	 		
+  	 	}    	
+    }
+    
   	public function getList()
 	{
 		if(!($this->_listlib instanceof \App\Htstp\Library\Listnumber)){
