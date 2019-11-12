@@ -15,7 +15,7 @@ class UserController extends Controller
 	  private $_userlib = null;
 
 	  public function index(){
-	    return view('admin.users.users');
+             return view('admin.users.users');
 	  }
 	  public function adduser(){
 	  	return view('admin.users.add_user');

@@ -78,7 +78,7 @@
                  </a>
           </li>  
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('lead_status')}}" class="nav-link">
                 <i class="nav-icon fa fa-dial"></i>
                <p>
                 Leads Status
@@ -86,7 +86,7 @@
                  </a>
           </li> 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('dialstatus')}}" class="nav-link">
                 <i class="nav-icon fa fa-dial"></i>
                <p>
                 Dial Status
@@ -94,23 +94,16 @@
                  </a>
           </li> 
             <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('agent_performance')}}" class="nav-link">
                 <i class="nav-icon fa fa-dial"></i>
                <p>
                 Agent Performance
               </p>
                  </a>
           </li> 
-           <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-dial"></i>
-               <p>
-                Dailing report
-              </p>
-                 </a>
-          </li> 
+           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('download')}}" class="nav-link">
                 <i class="nav-icon fa fa-dial"></i>
                <p>
                 Voice Bulk Download

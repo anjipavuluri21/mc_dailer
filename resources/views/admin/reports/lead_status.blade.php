@@ -11,7 +11,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Reports</li>
+              <li class="breadcrumb-item active">Lead Reports</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -23,7 +23,7 @@
       <div class="container-fluid">
          @include('admin.common.message')
         <div class="card">
-          <div class="card-header"><h4><i class="fa fa-user"></i>&nbsp;Reports</h4></div>
+          <div class="card-header"><h4><i class="fa fa-user"></i>&nbsp;Lead Reports</h4></div>
           <div class="card-body">
             <a class="btn btn-primary float-right btn-sm" href="{{route('add_number',1)}}">Recycle</a>
             <a class="btn btn-primary float-right btn-sm" href="{{route('add_number',1)}}">Export</a>
@@ -58,17 +58,17 @@ $(document).ready(function(){
   var emp_table = $('#lead_listing').DataTable({
       processing: true,
       serverSide: true,
-      ajax: '{!! route('lead_listing') !!}',
+      ajax: '{!! route('lead_status_list') !!}',
       columns: [
-          { Data: 'Date', name:'date'},
-         { data: 'name', name: 'name' },
-         { data: 'mobil_number', name: 'mobile_number'},
-         { data: 'customer_name',name:'customer_name'},
-         { data: 'telephone_number', name: 'telephone_number'},
-         { data: 'dispo',name:'dispo'},
-         { data: 'dial_status',name:'dial_status'},
-         { data: 'assigned_status',name:'assigned_status'},
-         { data: 'comments',name: 'comments'},
+          { data: 'date', name: 'date'},
+         { data: 'name', name: 'name'},
+         { data: 'mobile_no',name: 'mobile_no'},
+         { data: 'name',name: 'name'},
+         { data: 'mobile_no',name: 'mobile_no'},
+         { data: 'dispo_name',name:'dispo_name'},
+         { data: 'status',name:'status'},
+         { data: 'assign_status',name:'assign_status'},
+         { data: 'desp_comments',name:'desp_comments'},
          
       ]
   });

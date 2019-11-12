@@ -68,6 +68,7 @@ class UserRepository extends RepositoryAbstract{
            return $type;
         })
        ->addColumn('action', function ($data) {         
+           // return '<audio controls><source src="uploads/audio/'.$data->audio.'" type="audio/mpeg"></audio><a href="'. url('edit_user/').'/'.$data->id.'" title="Edit Task" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a><a href="#" style="margin-left:5px;" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>';              
             return '<a href="'. url('edit_user/').'/'.$data->id.'" title="Edit Task" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a><a href="#" style="margin-left:5px;" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>';              
         })
      ->escapeColumns([])

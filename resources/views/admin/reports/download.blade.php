@@ -1,4 +1,28 @@
 @extends('admin.common.main')
+  <style>
+
+   .row{
+
+       margin-bottom:4px;
+   }   
+  .side1
+  {
+    background-color:purple;
+    text-align: end;
+    color:white;
+
+  }
+  div input{
+    width:100%;
+    border-radius: 5px 5px;
+    height:38px;
+    
+    display: block;
+    margin-bottom: 5px;
+    margin-left:-12px;
+
+  }
+  </style>
 @section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -21,7 +45,7 @@
     <!-- /.content-header -->
      @include('admin.common.message')
      <section class="content">
-      <div class="container-fluid">
+<!--      <div class="container-fluid">
       
               <div class="row">
                     <div class="col-md-3" style="background-color: red;">
@@ -30,16 +54,49 @@
                     <div class="col-md-3">
                     <input value="" type="date" name="name" class="form-control"  placeholder="Name">
                   </div>
-<!--                  <div class="col-md-3">
+                  <div class="col-md-3">
                     <input value="" type="hidden" name="id">
                     <input value="" type="date" name="name" class="form-control"  placeholder="Name">
-                  </div>-->
+                  </div>
                 </div><br>
                 
              </div>
-      </div>
-          
+      </div>-->
+<div class="container">
+    <div class="container-fluid">
+    <div class="row">
+
+        
             
+        </div>
+    <div class="row">
+
+        <div class="col-md-4 sm-4 side1">
+                <p>From Date:</p>
+                <p>End Date:</p>
+                <p>User(MobileNo)</p>
+        </div>
+        &nbsp;&nbsp;
+        <div class="col-md-4 sm-4">
+            <input type="text"/>
+            <input type="text"/>
+            <input type="text"/>
+            
+        </div>
+       
+    </div>
+    </div>
+    
+
+
+    <div class="row">
+
+            <button class="btn btn-primary">Compress</button>
+    
+        </div>
+
+</div>
+      <div class="card-footer">Footer</div>      
           </section>
      @endsection
 

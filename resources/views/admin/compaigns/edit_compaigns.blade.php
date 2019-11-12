@@ -31,64 +31,64 @@
               <!-- <div class="card-header">
                 <h3 class="card-title">Quick Example</h3>
               </div> -->
-              <form method="post" action="{{route('updateUser')}}" >
+              <form method="post" action="{{route('updateCompaign')}}" >
                 {{ csrf_field() }} 
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="exampleInputEmail1">Name</label>
+                    <label for="exampleInputEmail1">Compaign Name</label>
                   </div>
                   <div class="col-md-6">
-                    <input value="{{$getuser->id}}" type="hidden" name="id">
-                    <input value="{{$getuser->name}}" type="text" name="name" class="form-control"  placeholder="Name">
-                  </div>
-                </div><br>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="exampleInputEmail1">Mobile Number</label>
-                  </div>
-                  <div class="col-md-6">
-                    <input value="{{$getuser->mobile_no}}" type="text" class="form-control" name="mobile_no" placeholder="Mobile Number">
+                    <input value="{{$editRes->id}}" type="hidden" name="id">
+                    <input type="text" name="compaign_name" class="form-control"  value="{{$editRes->compaign_name}}">
                   </div>
                 </div><br>
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="exampleInputEmail1">Designation</label>
+                    <label for="exampleInputEmail1">Discription</label>
                   </div>
                   <div class="col-md-6">
-                    <input value="{{$getuser->designation}}" type="text" class="form-control" name="designation" placeholder="Designation">
-                  </div>
-                </div><br>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="exampleInputEmail1">Department</label>
-                  </div>
-                  <div class="col-md-6">
-                    <input value="{{$getuser->department}}"  type="text" class="form-control" name="department" placeholder="Department">
+                    <input type="text" class="form-control" name="discription" value="{{$editRes->discription}}">
                   </div>
                 </div><br>
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="exampleInputEmail1">Gender</label>
+                    <label for="exampleInputEmail1">status</label>
                   </div>
                   <div class="col-md-6">
-                    <input @if($getuser->gender == 1) checked="checked" @endif type="radio"  name="gender" value="1" />&nbsp;Male
-                    <input @if($getuser->gender == 2) checked="checked" @endif type="radio"  name="gender" value="2" />&nbsp;Female
-                  </div>
-                </div><br>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="exampleInputEmail1">User Type</label>
-                  </div>
-                  <div class="col-md-6">
-                    <select class="form-control" name="user_type">
-                      <option value="">Select User type</option>
-                      <option value="1" @if($getuser->type == 1) selected @endif>Admin</option>
-                      <option value="2" @if($getuser->type == 2) selected @endif>User</option>
+                    <select class="form-control" name="status">
+                      <option value="">Select Status</option>
+                      <option value="1" @if($editRes->status == 1) selected @endif> Active</option>
+                     <option value="2" @if($editRes->status == 2) selected @endif> In Active</option>
                     </select>
                   </div>
                 </div><br>
-                <button class="btn btn-primary" type="submit">Update</button>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="exampleInputEmail1">Max Leads</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="max_leads" value="{{$editRes->max_leads}}">
+                  </div>
+                </div><br>
+                  
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="exampleInputEmail1">List</label>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control" name="list">
+                        <option value="">Select List</option>
+                        @foreach($listRes as $list )
+                        <option value="{{$list->id}}">{{$list->list_name}}</option>
+                        @endforeach
+                      
+                      
+                    </select>
+                  </div>
+                </div><br>  
+                
+                <button class="btn btn-primary" type="submit">Save</button>
                 <button class="btn btn-primary" type="reset">Cancel</button>
               </div>
               </form>

@@ -54,14 +54,14 @@ class ListRepository extends RepositoryAbstract{
             return $total_leads;          
         })
        ->addColumn('action', function ($data) {         
-            return '<a href="'. url('list_details/').'/'.$data->id.'" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a><a style="margin-left:5px;" href="'. url('edit_lead/').'/'.$data->id.'" title="Edit Task" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a><a href="#" style="margin-left:5px;" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>';              
+            return '<a href="'. url('list_details/').'/'.$data->id.'" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a><a style="margin-left:5px;" href="'. url('edit_list/').'/'.$data->id.'" title="Edit Task" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a><a href="#" style="margin-left:5px;" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>';              
         })
      ->escapeColumns([])
         ->addIndexColumn()->make(true);
   }
   public function getSinglelist($id){
-    //$data = $this->getlistModel()->where()->('id',$id)->get();
-    //return $data;
+    $data = $this->getlistModel()->where('id',$id)->get();
+    return $data;
   }
   public function allLeads(){
     $data = $this->getleadModel()->get();

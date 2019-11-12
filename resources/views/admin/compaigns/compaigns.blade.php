@@ -1,3 +1,7 @@
+<?php 
+echo 'welcome to compaign team';
+exit;
+?>
 @extends('admin.common.main')
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -11,7 +15,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Lead Reports</li>
+              <li class="breadcrumb-item active">Compaign</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -23,22 +27,18 @@
       <div class="container-fluid">
          @include('admin.common.message')
         <div class="card">
-          <div class="card-header"><h4><i class="fa fa-user"></i>&nbsp;Reports</h4></div>
+          <div class="card-header"><h4><i class="fa fa-user"></i>&nbsp;Compaign Details</h4></div>
           <div class="card-body">
-            <a class="btn btn-primary float-right btn-sm" href="{{route('add_number',1)}}">Recycle</a>
-            <a class="btn btn-primary float-right btn-sm" href="{{route('add_number',1)}}">Export</a>
+            <a class="btn btn-primary float-right btn-sm" href="{{route('add_compaigns')}}"><i class="fa fa-plus" style="font-size:14px;"></i>&nbsp;Add</a>
               <table id="lead_listing" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>User Name</th>
-                  <th>Mobile Number</th>
-                  <th>Customer Name</th>
-                  <th>Teleophone Number</th>
-                  <th>Dispo</th>
-                  <th>Dial Status</th>
-                  <th>Assigned Status</th>
-                  <th>Comments</th>
+                  <th>Campaign Name</th>
+                  <th>Discription</th>
+                  <th>Status</th>
+                  <th>Max Leads</th>
+                  <th>details</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,18 +58,14 @@ $(document).ready(function(){
   var emp_table = $('#lead_listing').DataTable({
       processing: true,
       serverSide: true,
-      ajax: '{!! route('lead_listing') !!}',
+      ajax: '{!! route('campaignList') !!}',
       columns: [
-          { Data: 'Date', name:'date'},
-         { data: 'name', name: 'name' },
-         { data: 'mobil_number', name: 'mobile_number'},
-         { data: 'customer_name',name:'customer_name'},
-         { data: 'telephone_number', name: 'telephone_number'},
-         { data: 'dispo',name:'dispo'},
-         { data: 'dial_status',name:'dial_status'},
-         { data: 'assigned_status',name:'assigned_status'},
-         { data: 'comments',name: 'comments'},
-         
+         { data: 'campaign_name', name: 'campaign_name' },
+         { data: 'discription', name: 'discription'},
+         { data: 'status', name: 'status'},
+         {data:'max_leads', name: 'max_leads'},
+         { data:'details', name: 'details'},
+         { data: 'action', name: 'action', orderable: false, searchable: false}
       ]
   });
 });

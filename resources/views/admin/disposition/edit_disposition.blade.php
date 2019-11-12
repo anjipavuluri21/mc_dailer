@@ -30,7 +30,7 @@
               <!-- <div class="card-header">
                 <h3 class="card-title">Quick Example</h3>
               </div> -->
-              <form method="post" action="{{route('list_disposition')}}">
+              <form method="post" action="{{route('updateDisposition')}}">
                 {{ csrf_field() }} 
               <div class="card-body">
                 <div class="row">
@@ -38,17 +38,43 @@
                     <label for="exampleInputEmail1">Name</label>
                   </div>
                   <div class="col-md-6">
-                    <input value="{{$discription->id}}" type="hidden" name="id">
-                    <input value="{{$discription->name}}" type="text" name="name" class="form-control"  placeholder="Name">
+                    <input value="{{$editRes->id}}" type="hidden" name="id">
+                    <input value="{{$editRes->dispo_name}}" type="text" name="dispo_name" class="form-control"  placeholder="Name">
                   </div>
                 </div><br>
-
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="exampleInputEmail1">discription</label>
+                    <label for="exampleInputEmail1">User</label>
                   </div>
                   <div class="col-md-6">
-                    <input value="{{$discription->discription}}" type="text" class="form-control" name="discription" placeholder="discription">
+                    <select class="form-control" name="user_id">
+                        <option value="">Select User</option>
+                        @foreach($userRes as $list )
+                        <?php 
+                        if($editRes->user_id == $list->id){
+                        $select="selected";
+                        }
+                        else{
+                          $select="";  
+                        }
+                        ?>
+                        
+                        <option value="{{$list->id}}" <?php echo $select;?>>{{$list->name}}</option>
+                        @endforeach
+                      
+                      
+                    </select>
+                  </div>
+                </div><br>
+               
+                
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="exampleInputEmail1">Discription</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" value="{{$editRes->discription}}" class="form-control" name="discription" placeholder="Discription">
                   </div>
                 </div><br>
                 <div class="row">
@@ -56,28 +82,54 @@
                     <label for="exampleInputEmail1">Dispo Code</label>
                   </div>
                   <div class="col-md-6">
-                    <input value="{{$discription->dispo_code}}" type="text" class="form-control" name="comments" placeholder="Dispo Code">
+                    <input type="text" value="{{$editRes->dispo_code}}"  class="form-control" name="dispo_code" placeholder="Dispo Code">
                   </div>
-                      <div class="row">
+                </div><br>
+                
+               
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="exampleInputEmail1">Call Back</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" value="{{$editRes->call_back}}"  name="call_back" placeholder="callback">
+                  </div>
+                </div><br>
+                <div class="row">
                   <div class="col-md-6">
                     <label for="exampleInputEmail1">Status</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="radio"  name="status" value="1" />&nbsp;Connected
-                    <input type="radio"  name="status" value="2" />&nbsp;Not Connected
+                    <select class="form-control" name="status">
+                      <option value="">Select Status</option>
+                      <option value="1" <?php if($editRes->status==1){ echo "selected";} ?>>Connected</option>
+                      <option value="2" <?php if($editRes->status==2){ echo "selected";} ?>>Not Connected</option>
+                    </select>
                   </div>
-                </div><br>
-                  <div class="row">
+                </div><br/>
+                <div class="row">
                   <div class="col-md-6">
-                    <label for="exampleInputEmail1">Callback</label>
+                    <label for="exampleInputEmail1">Assign Status</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="radio"  name="callback" value="1" />&nbsp;Yes
-                    <input type="radio"  name="callback" value="2" />&nbsp;No
+                    <select class="form-control" name="assign_status">
+                      <option value="">Select Status</option>
+                      <option value="1" <?php if($editRes->assign_status==1){ echo "selected";} ?>>Assigned</option>
+                      <option value="2" <?php if($editRes->assign_statuss==2){ echo "selected";} ?>>Not Assigned</option>
+                    </select>
+                  </div>
+                </div><br/>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="exampleInputEmail1">Comments</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" value="{{$editRes->comments}}"  name="comments" placeholder="comments">
                   </div>
                 </div><br>
-                </div><br>
-                <button class="btn btn-primary" type="submit">Save</button>
+                
+                
+                <button class="btn btn-primary" type="submit">Update</button>
                 <button class="btn btn-primary" type="reset">Cancel</button>
               </div>
               </form>

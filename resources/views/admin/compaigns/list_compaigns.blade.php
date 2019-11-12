@@ -25,15 +25,16 @@
         <div class="card">
           <div class="card-header"><h4><i class="fa fa-user"></i>&nbsp;Compaign Details</h4></div>
           <div class="card-body">
-            <a class="btn btn-primary float-right btn-sm" href="{{route('add_user')}}"><i class="fa fa-plus" style="font-size:14px;"></i>&nbsp;Add</a>
+            <a class="btn btn-primary float-right btn-sm" href="{{route('add_compaigns')}}"><i class="fa fa-plus" style="font-size:14px;"></i>&nbsp;Add</a>
               <table id="lead_listing" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>Campaign Name</th>
                   <th>Discription</th>
-                  <th>Status</th>
+                  
                   <th>Max Leads</th>
-                  <th>details</th>
+                  <th>Status</th>
+                  <th>List</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -50,17 +51,34 @@
 @endsection
 @section('js')
 <script>
+//$(document).ready(function(){ 
+//  var emp_table = $('#campaigns_listing').DataTable({
+//      processing: true,
+//      serverSide: true,
+//      ajax: '{!! route('dispositionList') !!}',
+//      columns: [
+//         { data: 'campaign_name', name: 'campaign_name' },
+//         { data: 'discription', name: 'discription'},
+//         { data: 'status', name: 'status'},
+//         { data:'max_leads', name:'max_leads'},
+//         { data:'details', name:'details'},
+//         { data: 'action', name: 'action', orderable: false, searchable: false}
+//      ]
+//  });
+//});
 $(document).ready(function(){ 
+  
   var emp_table = $('#lead_listing').DataTable({
       processing: true,
       serverSide: true,
-      ajax: '{!! route('lead_listing') !!}',
+      ajax: '{!! route('compaignList') !!}',
+      //console.log(data);
       columns: [
-         { data: 'campaign_name', name: 'campaign_name' },
-         { data: 'discription', name: 'discription'},
+         { data: 'compaign_name', name: 'compaign_name'},
+         { data: 'discription',name: 'discription'},
+         { data: 'max_leads',name:'max_leads'},
          { data: 'status',name: 'status'},
-         {data:'max_leads',name:'max_leads'}
-         { data:'details',name:'details'}
+         { data: 'list',name: 'list'},
          { data: 'action', name: 'action', orderable: false, searchable: false}
       ]
   });

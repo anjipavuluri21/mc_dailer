@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Disposition</h1>
+            <h1>Add Compaign</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -23,22 +23,21 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          
           <!-- left column -->
           <div class="col-md-6">
             <div class="card card-primary">
               <!-- <div class="card-header">
                 <h3 class="card-title">Quick Example</h3>
               </div> -->
-              <form method="post" action="{{route('list_compaigns')}}">
-                {{ csrf_field() }} 
+              <form method="post" action="{{route('saveCompaigns')}}">
+                {{ csrf_field() }}  
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
                     <label for="exampleInputEmail1">Compaign Name</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" name="name" class="form-control"  placeholder="Compaign Name">
+                    <input type="text" name="compaign_name" class="form-control"  placeholder="Compaign Name">
                   </div>
                 </div><br>
                 <div class="row">
@@ -46,7 +45,7 @@
                     <label for="exampleInputEmail1">Discription</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="email" placeholder="Discription">
+                    <input type="text" class="form-control" name="discription" placeholder="discription">
                   </div>
                 </div><br>
                 <div class="row">
@@ -54,7 +53,7 @@
                     <label for="exampleInputEmail1">status</label>
                   </div>
                   <div class="col-md-6">
-                    <select class="form-control" name="status">s
+                    <select class="form-control" name="status">
                       <option value="">Select Status</option>
                       <option value="1">Active</option>
                       <option value="2">InActive</option>
@@ -66,7 +65,7 @@
                     <label for="exampleInputEmail1">Max Leads</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="maxleads" placeholder="Max Leads">
+                    <input type="text" class="form-control" name="max_leads" placeholder="Max Leads">
                   </div>
                 </div><br>
                  <div class="row">
@@ -76,7 +75,22 @@
                   <div class="col-md-6">
                     <input type="text" class="form-control" name="details" placeholder="Details">
                   </div>
-                </div><br>
+                </div><br>  
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="exampleInputEmail1">List</label>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control" name="list">
+                        <option value="">Select List</option>
+                        @foreach($listRes as $list )
+                        <option value="{{$list->id}}">{{$list->list_name}}</option>
+                        @endforeach
+                      
+                      
+                    </select>
+                  </div>
+                </div><br>  
                 
                 <button class="btn btn-primary" type="submit">Save</button>
                 <button class="btn btn-primary" type="reset">Cancel</button>

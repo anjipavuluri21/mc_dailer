@@ -25,7 +25,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="card card-primary">
-              <form method="post" action="{{route('add_list')}}">
+              <form method="post" action="{{route('updateList')}}">
                 {{ csrf_field() }} 
               <div class="card-body">
                 <div class="row">
@@ -33,7 +33,8 @@
                     <label for="exampleInputEmail1">Name</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" name="list_name" class="form-control"  placeholder="List Name">
+                      <input value="{{$list[0]->id}}" type="hidden" name="id">
+                    <input type="text" name="list_name" class="form-control" value="{{$list[0]->list_name}}" placeholder="List Name">
                   </div>
                 </div><br>
 
@@ -42,7 +43,7 @@
                     <label for="exampleInputEmail1">Type</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="list_type" placeholder="List Type">
+                    <input type="text" class="form-control" name="list_type" value="{{$list[0]->list_type}}" placeholder="List Type">
                   </div>
                 </div><br>
 

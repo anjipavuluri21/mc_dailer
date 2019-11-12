@@ -25,11 +25,14 @@
         <div class="card">
           <div class="card-header"><h4><i class="fa fa-list"></i>&nbsp;Disposition List</h4></div>
           <div class="card-body">
+            
               <a class="btn btn-primary float-right btn-sm" href="{{route('add_disposition')}}"><i class="fa fa-plus" style="font-size:14px;"></i>&nbsp;Add</a>
                          <table id="lead_listing" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                    
                   <th>Main Dispo Name</th>
+                  <th>User Name</th>
                   <th>Discription</th>
                   <th>Main Dispo Code</th>
                   <th>Status</th>
@@ -38,8 +41,7 @@
                   <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
-              </tbody>
+                
             </table>
           </div>
           <div class="card-footer">Footer</div>
@@ -52,12 +54,14 @@
 @section('js')
 <script>
 $(document).ready(function(){ 
+  
   var emp_table = $('#lead_listing').DataTable({
       processing: true,
       serverSide: true,
-      ajax: '{!! route('log_list') !!}',
+      ajax: '{!! route('dispositionList') !!}',
       columns: [
          { data: 'dispo_name', name: 'dispo_name'},
+         { data: 'user_name', name: 'user_name'},
          { data: 'discription',name: 'discription'},
          { data: 'dispo_code',name: 'dispo_code'},
          { data: 'status',name: 'status'},

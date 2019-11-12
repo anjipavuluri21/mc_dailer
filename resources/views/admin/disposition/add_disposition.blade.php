@@ -30,7 +30,7 @@
               <!-- <div class="card-header">
                 <h3 class="card-title">Quick Example</h3>
               </div> -->
-              <form method="post" action="{{route('saveUser')}}">
+              <form method="post" action="{{route('saveDisposition')}}">
                 {{ csrf_field() }} 
               <div class="card-body">
                 <div class="row">
@@ -38,7 +38,22 @@
                     <label for="exampleInputEmail1">Disposition Name</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" name="name" class="form-control"  placeholder="dispo Name">
+                    <input type="text" name="dispo_name" class="form-control"  placeholder="dispo Name">
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="exampleInputEmail1">User</label>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control" name="user_id">
+                        <option value="">Select User</option>
+                        @foreach($userRes as $list )
+                        <option value="{{$list->id}}">{{$list->name}}</option>
+                        @endforeach
+                      
+                      
+                    </select>
                   </div>
                 </div><br>
                 <div class="row">
@@ -46,7 +61,7 @@
                     <label for="exampleInputEmail1">Discription</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="email" placeholder="Discription">
+                    <input type="text" class="form-control" name="discription" placeholder="Discription">
                   </div>
                 </div><br>
                 <div class="row">
@@ -64,7 +79,7 @@
                     <label for="exampleInputEmail1">Call Back</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="callback" placeholder="callback">
+                    <input type="text" class="form-control" name="call_back" placeholder="callback">
                   </div>
                 </div><br>
                 <div class="row">
@@ -72,11 +87,31 @@
                     <label for="exampleInputEmail1">Status</label>
                   </div>
                   <div class="col-md-6">
-                    <select class="form-control" name="Status_type">
+                    <select class="form-control" name="status">
                       <option value="">Select Status</option>
                       <option value="1">Connected</option>
                       <option value="2">Not Connected</option>
                     </select>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="exampleInputEmail1">Assigned Status</label>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control" name="assign_status">
+                      <option value="">Select Status</option>
+                      <option value="1">Assigned</option>
+                      <option value="2">Not Assigned</option>
+                    </select>
+                  </div>
+                </div><br>
+                 <div class="row">
+                  <div class="col-md-6">
+                    <label for="exampleInputEmail1">Comments</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="comments" placeholder="comments">
                   </div>
                 </div><br>
                 <button class="btn btn-primary" type="submit">Save</button>
