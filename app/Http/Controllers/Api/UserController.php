@@ -50,9 +50,8 @@ class UserController extends Controller
      }
     }
  
-    public function register(Request $request)
+     public function registerUser(Request $request)
         {
-            
             $messages = [
                 'password.required' => 'Please enter password',
                 'email.required' => 'Please enter email',
@@ -61,25 +60,25 @@ class UserController extends Controller
                 'name.required' => 'Please enter name',
                 'date.required' => 'Please enter date',
                 'mobile_no' => 'Enter mobile no',
-                'comments' => 'Enter Comments',      
-                'audio' => 'Audio file required',      
+                // 'comments' => 'Enter Comments',      
+                // 'audio' => '',      
             ];
             /* validation request rules  */
             $rules = [
                 'password' => '',
                 'email' => '',
                 'date' => '',
-                'name' => '',
+                'name' => 'required',
                 'mobile_no' => 'required',
-                'comments' => 'required',
-                'audio' => '',
+                // 'comments' => 'required',
+                // 'audio' => '',
+                
             ];
              $validator = Validator::make($request->all(), $rules, $messages);
             
              if ($validator->fails()) {
                 return response()->json(['success' => false, 'error' => $validator->messages()]);
             }
-         
              $file = $request->file('audio');
    
 //      //Display File Name
@@ -92,27 +91,34 @@ class UserController extends Controller
 //      $file->getSize();
 //      //Display File Mime Type
 //     $file->getMimeType();
-   $fileName=$file->getClientOriginalName();
-      //Move Uploaded File
-      //$fileName = date("Ymd_His") . rand(0000, 9999) . '_mc_dailer';
-      $destinationPath = 'uploads/audio';
-      $file->move($destinationPath,$file->getClientOriginalName());
-           
+            $fileName="";
+            if($file !=""){
+               $fileName=$file->getClientOriginalName();
+                  //Move Uploaded File
+                  //$fileName = date("Ymd_His") . rand(0000, 9999) . '_mc_dailer';
+                  $destinationPath = 'uploads/audio';
+                  $file->move($destinationPath,$file->getClientOriginalName());
+            }      
             $insertArray=array(
                 'name'=>$request->name,
                 'audio'=>$fileName,
 //                'date'=>$request->date,
 //                'email'=>$request->email,
                 'mobile_no' =>$request->mobile_no,
-                'comments' =>$request->comments,
+                // 'comments' =>$request->comments,
 //                'password'=>Hash::make($request->password),
                 'type'=>2
                 
             );
             $user= User::insert($insertArray);
             //$user= DB::table('users')->insert($insertArray);
+            if($request->comments == "" || $request->comments == null){
+                $comments="Fresh Call";
+            }else{
+                 $comments="Follow Up Call";
+            }
             if($user){
-                return response()->json(['success' => true, 'message' => 'user register successfully']);
+                return response()->json(['success' => true, 'message' => 'user register successfully','comments' => $comments]);
             }else{
                 return response()->json(['success' => false, 'message' => 'Internal server error']);
             }
@@ -129,9 +135,9 @@ class UserController extends Controller
          }
         
          public function userlist(){
-            $user= User::all();
+            $user= User::all(); 
             if($user){
-                return response()->json(['success' => true, 'message' => 'user found' ,'result'=>$user,'audioPath'=>base_url().'uploads/audio/']);
+                return response()->json(['success' => true, 'message' => 'user found' ,'result'=>$user]);
             }else{
                 return response()->json(['success' => false, 'message' => 'no user found']);
             }
@@ -231,4 +237,20 @@ class UserController extends Controller
             }
 
         }
+       public function dailStatus($user_id){
+           
+
+            $user=DB::table('disposition')
+                    ->leftJoin('users', 'disposition.user_id', '=', 'users.id')
+                    ->select('disposition.comments','users.name','users.audio','users.mobile_no','disposition.comments As desp_comments','disposition.created_at As date','disposition.user_id As attempts')
+                    ->where('disposition.user_id',$user_id)
+                    // ->groupBy('disposition.user_id')
+                    ->get(); 
+            if($user){
+                return response()->json(['success' => true, 'message' => 'user found' ,'result'=>$user]);
+            }else{
+                return response()->json(['success' => false, 'message' => 'no user found']);
+            }
+         }
+        
 }

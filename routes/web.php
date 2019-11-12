@@ -80,6 +80,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'auth'], function() {
         
         
         Route::get('/dialstatus','ReportsController@dialstatus_report')->name('dialstatus');
+        Route::get('/dail_status_list','ReportsController@dail_status_list')->name('dail_status_list');
         Route::get('/agent_performance','ReportsController@agent_report')->name('agent_performance');
         Route::get('/download','ReportsController@download_report')->name('download');
 

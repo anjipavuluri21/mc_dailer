@@ -15,14 +15,16 @@ use Illuminate\Http\Request;
 
 Route::group(['namespace' => 'Api','prefix' => 'user'], function(){ 
 Route::post('login', 'UserController@login');
-Route::post('register', 'UserController@register');
+Route::post('registerUser', 'UserController@registerUser');
 Route::post('data', 'UserController@data');
+Route::get('dailStatus/{userId?}', 'UserController@dailStatus');
 
 Route::post('registerNew', 'UserController@registerNew');
 Route::get('test', 'UserController@test');
 Route::get('test','Usercontoller@test');
 Route::get('list', 'UserController@userlist');
 Route::get('profile/{userId?}', 'UserController@profile');
+
 //Route::get('all','UserController@all_list');
 
 

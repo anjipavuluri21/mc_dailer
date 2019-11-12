@@ -81,7 +81,80 @@ class ReportsController extends Controller
 
         return view('admin.reports.dialstatus');
     }
-        public function agent_report(){
+    public function dail_status_list(){
+        $data=DB::table('Disposition')
+                    ->leftJoin('users', 'Disposition.user_id', '=', 'users.id')
+                    ->select('*','Disposition.comments As desp_comments','Disposition.created_at As date','disposition.user_id As attempts')
+//                    ->groupBy('Disposition.user_id')
+                    ->get();
+//        dd($data);
+        return Datatables::of($data)
+                 ->editColumn('attempts', function ($data) {   
+                       if($data->attempts == "" || $data->attempts == "NULL" ){
+                           $data->attempts="1";
+                       } else{
+                          $data->attempts=$data->attempts;
+                       }
+                      return $data->attempts;
+                   })
+                    ->editColumn('date', function ($data) {  
+                       if($data->date == ""){
+                           $data->date="NA";
+                       } else{
+                          $data->date=$data->date; 
+                       }
+                      return $data->date;
+                   })
+                   ->editColumn('date', function ($data) {   
+                       if($data->date == ""){
+                           $data->date="NA";
+                       } else{
+                          $data->date=$data->date;
+                       }
+                      return $data->date;
+                   })
+                    ->editColumn('name', function ($data) {      
+                      return $data->name;
+                   })
+                    ->editColumn('mobile_no', function ($data) {      
+                      return $data->mobile_no;
+                   })
+                    ->editColumn('name', function ($data) {      
+                      return $data->name;
+                   })
+                    ->editColumn('mobile_no', function ($data) {      
+                      return $data->mobile_no;
+                   })
+                    ->editColumn('status', function ($data) {         
+                       if($data->status == 1){
+                         $type = "Connected";
+                       } 
+                       elseif ($data->status == 2) {
+                         $type = "Not Connected";
+                      }         
+                      return $type;
+                   })
+                    ->editColumn('dispo_name', function ($data) {      
+                      return $data->dispo_name;
+                   })
+                   
+                   ->editColumn('audio', function ($data) {
+                       if($data->audio == ""){
+                           $data->audio="NA";
+                       }
+//                      return $data->audio;
+//                      return '<a style="margin-left:5px;" href="'. "base_url().'uploads/audio/'".'/'.$data->audio.'" title="Play Audio" class="btn btn-sm btn-primary"><i class="fa fa-play"></i>' .$data->audio. '<a/>';
+                      return '<audio controls><source src="'.'uploads/audio/'.$data->audio.'" type="audio/mpeg"><i class="fa fa-play"></i>' .$data->audio.'</audio>';
+                   })
+                  ->addColumn('download', function ($data) {  
+                      
+                       return '<a style="margin-left:5px;" href="'.'uploads/audio/'.$data->audio.'" title="Download Audio" class="btn btn-sm btn-primary" download><i class="fa fa-download"></i></a>';              
+                   })
+                   
+                ->escapeColumns([])
+                   ->addIndexColumn()->make(true);
+    } 
+        public function agent_report(){ 
 
         return view('admin.reports.agent_performance');
     }

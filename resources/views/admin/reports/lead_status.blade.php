@@ -25,8 +25,10 @@
         <div class="card">
           <div class="card-header"><h4><i class="fa fa-user"></i>&nbsp;Lead Reports</h4></div>
           <div class="card-body">
-            <a class="btn btn-primary float-right btn-sm" href="{{route('add_number',1)}}">Recycle</a>
-            <a class="btn btn-primary float-right btn-sm" href="{{route('add_number',1)}}">Export</a>
+<!--            <a class="btn btn-primary float-right btn-sm" href="{{route('add_number',1)}}">Recycle</a>-->
+            <!--<a class="btn btn-primary float-right btn-sm" href="{{route('add_number',1)}}">Export</a>-->
+            <button class="btn btn-primary float-right btn-sm" onclick="exportTableToCSV('Leadreports.csv')">Export</button>
+
               <table id="lead_listing" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -73,5 +75,6 @@ $(document).ready(function(){
       ]
   });
 });
+
 </script>
 @endsection
